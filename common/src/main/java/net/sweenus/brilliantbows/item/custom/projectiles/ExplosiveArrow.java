@@ -20,10 +20,12 @@ public class ExplosiveArrow extends ArrowEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-                    boolean bl = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-                    this.world.createExplosion(null, this.getX(), this.getY(), this.getZ(), 1f, bl, bl ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE);
-                    this.discard();
-            }
+        if (!this.world.isClient) {
+            boolean bl = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
+            this.world.createExplosion(null, this.getX(), this.getY(), this.getZ(), 1f, bl, bl ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE);
+            this.discard();
+        }
+    }
 
     public ExplosiveArrow(World world, LivingEntity shooter) {
         super(world, shooter);

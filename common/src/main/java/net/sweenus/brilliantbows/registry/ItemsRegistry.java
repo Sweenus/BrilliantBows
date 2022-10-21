@@ -8,6 +8,7 @@ import net.minecraft.util.registry.Registry;
 import net.sweenus.brilliantbows.BrilliantBows;
 import net.sweenus.brilliantbows.config.BrilliantBowsConfig;
 import net.sweenus.brilliantbows.item.custom.Custom2Bow;
+import net.sweenus.brilliantbows.item.custom.RainBow;
 import net.sweenus.brilliantbows.item.custom.RicochetBow;
 import net.sweenus.brilliantbows.item.custom.TrishotBow;
 
@@ -29,8 +30,8 @@ public class ItemsRegistry {
 
     public static final DeferredRegister<Item> ITEM = DeferredRegister.create(BrilliantBows.MOD_ID, Registry.ITEM_KEY);
 
-    public static final RegistrySupplier<RicochetBow> LONGBOW = ITEM.register( "longbow", () ->
-            new RicochetBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.EPIC).maxDamage((int) wood_durability)));
+    public static final RegistrySupplier<RainBow> LONGBOW = ITEM.register( "longbow", () ->
+            new RainBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.EPIC).maxDamage((int) wood_durability)));
 
     public static final RegistrySupplier<TrishotBow> TRIBOW = ITEM.register( "tribow", () ->
             new TrishotBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.UNCOMMON).maxDamage((int) wood_durability)));
