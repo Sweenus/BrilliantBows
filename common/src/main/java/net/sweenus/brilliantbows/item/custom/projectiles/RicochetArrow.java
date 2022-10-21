@@ -30,7 +30,7 @@ public class RicochetArrow extends ArrowEntity {
                 if (entities instanceof LivingEntity le) {
                     boolean dontbreak = false;
 
-                    // Not really sure what you're trying to do with this if-else player check
+                    // Prevents ricochets towards the player, and prevents early loop breaks
                     if (le.isPlayer()) {
                         LivingEntity player = le;
                         dontbreak = true;

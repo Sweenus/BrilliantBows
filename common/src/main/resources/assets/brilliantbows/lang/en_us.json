@@ -1,8 +1,13 @@
 {
   "item.brilliantbows.tribow": "TriBow",
+  "item.brilliantbows.rainbow": "RainBow",
 
 
 
   "item.brilliantbows.tribow.tooltip2": "Magically transmutes arrows into",
-  "item.brilliantbows.tribow.tooltip3": "greater quantities when firing"
+  "item.brilliantbows.tribow.tooltip3": "greater quantities when firing",
+
+  "item.brilliantbows.rainbow.tooltip1": "Fires a bundle of arrows with",
+  "item.brilliantbows.rainbow.tooltip2": "a chance to summon forth a rain",
+  "item.brilliantbows.rainbow.tooltip3": "of arrows, devastating all below"
 }
