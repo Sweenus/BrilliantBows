@@ -11,6 +11,7 @@ public class PredicateProvider {
     public static void registerModModels() {
         registerBow(ItemsRegistry.LONGBOW.get());
         registerBow(ItemsRegistry.TRIBOW.get());
+        registerBow(ItemsRegistry.RAINBOW.get());
         registerBow(ItemsRegistry.CUSTOM_2_BOW.get());
 
     }

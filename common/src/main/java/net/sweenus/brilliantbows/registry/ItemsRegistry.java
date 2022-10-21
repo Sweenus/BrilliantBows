@@ -30,11 +30,14 @@ public class ItemsRegistry {
 
     public static final DeferredRegister<Item> ITEM = DeferredRegister.create(BrilliantBows.MOD_ID, Registry.ITEM_KEY);
 
-    public static final RegistrySupplier<RainBow> LONGBOW = ITEM.register( "longbow", () ->
-            new RainBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.EPIC).maxDamage((int) wood_durability)));
+    public static final RegistrySupplier<RicochetBow> LONGBOW = ITEM.register( "longbow", () ->
+            new RicochetBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.EPIC).maxDamage((int) wood_durability)));
 
     public static final RegistrySupplier<TrishotBow> TRIBOW = ITEM.register( "tribow", () ->
             new TrishotBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.UNCOMMON).maxDamage((int) wood_durability)));
+
+    public static final RegistrySupplier<RainBow> RAINBOW = ITEM.register( "rainbow", () ->
+            new RainBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.EPIC).maxDamage((int) wood_durability)));
 
     public static final RegistrySupplier<Custom2Bow> CUSTOM_2_BOW = ITEM.register("custom_2_bow", () ->
             new Custom2Bow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.EPIC).maxDamage((int) wood_durability)));
