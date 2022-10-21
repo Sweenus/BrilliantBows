@@ -15,8 +15,9 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
 import net.sweenus.brilliantbows.item.custom.projectiles.ExplosiveArrow;
+import net.sweenus.brilliantbows.item.custom.projectiles.RicochetArrow;
 
-public class ExplosiveBow extends BowItem {
+public class RicochetBow extends BowItem {
 
 
     @Override
@@ -35,7 +36,7 @@ public class ExplosiveBow extends BowItem {
                     boolean bl2 = bl && itemStack.isOf(Items.ARROW);
                     if (!world.isClient) {
                         ArrowItem arrowItem = (ArrowItem)(itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
-                        ArrowEntity arrowEntity = new ExplosiveArrow(world, playerEntity);
+                        ArrowEntity arrowEntity = new RicochetArrow(world, playerEntity);
                         arrowEntity.initFromStack(stack);
                         PersistentProjectileEntity persistentProjectileEntity = arrowEntity;
                         persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F, 1.0F);
@@ -69,6 +70,7 @@ public class ExplosiveBow extends BowItem {
                     }
 
                     world.playSound((PlayerEntity)null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    world.playSound((PlayerEntity)null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 0.8F, 1.3F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                     if (!bl2 && !playerEntity.getAbilities().creativeMode) {
                         itemStack.decrement(1);
                         if (itemStack.isEmpty()) {
@@ -89,7 +91,7 @@ public class ExplosiveBow extends BowItem {
 
 
 
-    public ExplosiveBow(Settings settings) {
+    public RicochetBow(Settings settings) {
         super(settings);
     }
 }
