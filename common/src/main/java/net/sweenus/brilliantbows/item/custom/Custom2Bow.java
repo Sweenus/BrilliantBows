@@ -21,6 +21,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import net.sweenus.brilliantbows.util.HelperMethods;
 
 public class Custom2Bow extends BowItem {
 
@@ -107,22 +108,10 @@ public class Custom2Bow extends BowItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        LivingEntity target = (LivingEntity) HelperMethods.getTargetedEntity(user, 256);
+        if (target != null && !target.hasStatusEffect(StatusEffects.GLOWING))
+            target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 100, 0), user);
 
-        //How do we highlight target
-        // If you're going to keep the radii the same in multiple bows, consider making a helper method to reduce
-        // duplicate code
-        int sradius = 50;
-        int vradius = 50;
-        double x = user.getX();
-        double y = user.getY();
-        double z = user.getZ();
-        Box box = new Box(x + sradius, y + vradius, z + sradius, x - sradius, y - vradius, z - sradius);
-        for (Entity entities : world.getOtherEntities(user, box, EntityPredicates.VALID_LIVING_ENTITY)) {
-            if (entities instanceof LivingEntity livingEntity) {
-                if (!livingEntity.hasStatusEffect(StatusEffects.GLOWING))
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 100, 0), user);
-            }
-        }
         return super.use(world, user, hand);
     }
 
