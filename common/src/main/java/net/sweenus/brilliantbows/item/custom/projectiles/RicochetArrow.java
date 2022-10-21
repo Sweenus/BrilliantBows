@@ -4,9 +4,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
@@ -15,9 +12,7 @@ import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.Box;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 
 public class RicochetArrow extends ArrowEntity {
 
@@ -34,6 +29,8 @@ public class RicochetArrow extends ArrowEntity {
             if (entities != null) {
                 if (entities instanceof LivingEntity le) {
                     boolean dontbreak = false;
+
+                    // Not really sure what you're trying to do with this if-else player check
                     if (le.isPlayer()) {
                         LivingEntity player = le;
                         dontbreak = true;

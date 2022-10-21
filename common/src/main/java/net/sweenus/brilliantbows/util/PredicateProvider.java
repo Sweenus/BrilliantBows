@@ -2,7 +2,6 @@ package net.sweenus.brilliantbows.util;
 
 
 import dev.architectury.registry.item.ItemPropertiesRegistry;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.sweenus.brilliantbows.registry.ItemsRegistry;
@@ -12,6 +11,7 @@ public class PredicateProvider {
     public static void registerModModels() {
         registerBow(ItemsRegistry.LONGBOW.get());
         registerBow(ItemsRegistry.TRIBOW.get());
+        registerBow(ItemsRegistry.CUSTOM_2_BOW.get());
 
     }
 

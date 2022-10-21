@@ -1,11 +1,10 @@
 package net.sweenus.brilliantbows;
+
 import com.google.gson.JsonObject;
-import dev.architectury.networking.NetworkManager;
+import dev.architectury.registry.CreativeTabRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.util.Identifier;
-import dev.architectury.registry.CreativeTabRegistry;
 import net.sweenus.brilliantbows.config.BrilliantBowsConfig;
 import net.sweenus.brilliantbows.config.Config;
 import net.sweenus.brilliantbows.registry.ItemsRegistry;

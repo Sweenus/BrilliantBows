@@ -1,9 +1,9 @@
 package net.sweenus.brilliantbows.forge;
 
 import dev.architectury.platform.forge.EventBuses;
-import net.sweenus.brilliantbows.BrilliantBows;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.sweenus.brilliantbows.BrilliantBows;
 
 @Mod(BrilliantBows.MOD_ID)
 public class BrilliantBowsForge {

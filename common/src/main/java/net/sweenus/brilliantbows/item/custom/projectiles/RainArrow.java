@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
@@ -27,7 +26,7 @@ public class RainArrow extends ArrowEntity {
     protected void onHit(LivingEntity target) {
         if (!this.world.isClient) {
             boolean bl = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-            this.world.createExplosion((Entity) null, this.getX(), this.getY(), this.getZ(), 1f, bl, bl ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE);
+            this.world.createExplosion(null, this.getX(), this.getY(), this.getZ(), 1f, bl, bl ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE);
             this.discard();
         }
     }
@@ -35,7 +34,7 @@ public class RainArrow extends ArrowEntity {
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         boolean bl = this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-        this.world.createExplosion((Entity) null, this.getX(), this.getY(), this.getZ(), 1f, bl, bl ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE);
+        this.world.createExplosion(null, this.getX(), this.getY(), this.getZ(), 1f, bl, bl ? Explosion.DestructionType.DESTROY : Explosion.DestructionType.NONE);
         this.discard();
     }
 
@@ -54,6 +53,8 @@ public class RainArrow extends ArrowEntity {
 
                 if (entities != null) {
                     if (entities instanceof LivingEntity le) {
+
+                        // Not really sure what you're trying to do with this if-else player check
                         if (le.isPlayer()) {LivingEntity player = le;}
                         else {
                             le.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 20, 1), this);
@@ -81,7 +82,7 @@ public class RainArrow extends ArrowEntity {
                         }
                     }
 
-                    world.playSound((PlayerEntity)null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + 1 * 0.5F);
+                    world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + 1 * 0.5F);
 
 
                     }

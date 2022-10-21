@@ -1,7 +1,7 @@
 package net.sweenus.brilliantbows.fabric;
 
-import net.sweenus.brilliantbows.BrilliantBows;
 import net.fabricmc.api.ModInitializer;
+import net.sweenus.brilliantbows.BrilliantBows;
 
 public class BrilliantBowsFabric implements ModInitializer {
     @Override
