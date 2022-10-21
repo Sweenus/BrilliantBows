@@ -1,8 +1,10 @@
 package net.sweenus.brilliantbows.item.custom;
 
+import dev.architectury.event.events.client.ClientTooltipEvent;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -19,7 +21,6 @@ import net.sweenus.brilliantbows.item.custom.projectiles.RainArrow;
 import net.sweenus.brilliantbows.item.custom.projectiles.RainArrow2;
 
 public class RainBow extends BowItem {
-
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
@@ -77,6 +78,7 @@ public class RainBow extends BowItem {
                     }
 
                     playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
+                    playerEntity.getItemCooldownManager().set(this, 120);
                 }
             }
         }
