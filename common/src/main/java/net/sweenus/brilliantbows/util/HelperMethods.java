@@ -1,6 +1,7 @@
 package net.sweenus.brilliantbows.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Box;
@@ -18,7 +19,7 @@ public class HelperMethods {
         Vec3d rayCastEnd = rayCastOrigin.add(userView);
         Box searchBox = user.getBoundingBox().expand(range, range, range);
         EntityHitResult hitResult = ProjectileUtil.raycast(user, rayCastOrigin, rayCastEnd, searchBox,
-                (target) -> !target.isSpectator() && target.canHit(), range * range);
+                (target) -> !target.isSpectator() && target.canHit() && target instanceof LivingEntity, range * range);
         if (hitResult != null) {
             return hitResult.getEntity();
         }

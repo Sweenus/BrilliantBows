@@ -8,6 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BowItem;
@@ -22,6 +23,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import net.sweenus.brilliantbows.item.custom.projectiles.ExplosiveArrow;
+import net.sweenus.brilliantbows.item.custom.projectiles.SeekerArrow;
 import net.sweenus.brilliantbows.util.HelperMethods;
 
 public class Custom2Bow extends BowItem {
@@ -70,33 +73,38 @@ public class Custom2Bow extends BowItem {
                                 if (entities instanceof LivingEntity le) {
                                     if (le.hasStatusEffect(StatusEffects.GLOWING)) {
 
-                                        ArrowItem arrowItem = (ArrowItem) (itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
-                                        PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, itemStack, playerEntity);
-                                        persistentProjectileEntity.setVelocity((le.getX() - user.getX()) / 5, (((le.getY() - user.getY()) - 0.5)  / 5), (le.getZ() - user.getZ())  / 5);
+                                        ArrowItem arrowItem = (ArrowItem)(itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
+                                        ArrowEntity arrowEntity = new SeekerArrow(world, playerEntity);
+                                        arrowEntity.initFromStack(stack);
+                                        //arrowEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3F, 1.0F);
+                                        arrowEntity.setVelocity(0, 10, 0);
                                         if (f == 1.0F) {
-                                            persistentProjectileEntity.setCritical(true);
+                                            arrowEntity.setCritical(true);
                                         }
 
                                         int j = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
                                         if (j > 0) {
-                                            persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
+                                            arrowEntity.setDamage(arrowEntity.getDamage() + (double) j * 0.5 + 0.5);
                                         }
 
                                         int k = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
                                         if (k > 0) {
-                                            persistentProjectileEntity.setPunch(k);
+                                            arrowEntity.setPunch(k);
                                         }
 
                                         if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
-                                            persistentProjectileEntity.setOnFireFor(100);
+                                            arrowEntity.setOnFireFor(100);
                                         }
 
                                         stack.damage(1, playerEntity, (p) -> p.sendToolBreakStatus(playerEntity.getActiveHand()));
                                         if (bl2 || playerEntity.getAbilities().creativeMode && (itemStack.isOf(Items.SPECTRAL_ARROW) || itemStack.isOf(Items.TIPPED_ARROW))) {
-                                            persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+                                            arrowEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
                                         }
 
-                                        world.spawnEntity(persistentProjectileEntity);
+                                        world.spawnEntity(arrowEntity);
+                                        ((SeekerArrow) arrowEntity).setTarget(le); // Sets the target for the arrow
+                                        ((SeekerArrow) arrowEntity).damageMultiplier(f); // Should the arrow seek its target (Seeker arrows will duplicate themselves with this property later in the sequence)
+                                        le.removeStatusEffect(StatusEffects.GLOWING);
 
                                     }
 
@@ -123,7 +131,7 @@ public class Custom2Bow extends BowItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         LivingEntity target = (LivingEntity) HelperMethods.getTargetedEntity(user, 256);
         if (target != null && !target.hasStatusEffect(StatusEffects.GLOWING))
-            target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 100, 0), user);
+            target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 200, 0), user);
 
         return super.use(world, user, hand);
     }
@@ -139,7 +147,7 @@ public class Custom2Bow extends BowItem {
                     if (player.age % lfrequency == 0) {
                         LivingEntity target = (LivingEntity) HelperMethods.getTargetedEntity(entity, 256);
                         if (target != null && !target.hasStatusEffect(StatusEffects.GLOWING))
-                            target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 100, 0), entity);
+                            target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 200, 0), entity);
 
 
                     }
