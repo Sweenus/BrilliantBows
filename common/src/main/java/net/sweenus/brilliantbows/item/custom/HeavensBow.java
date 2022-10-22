@@ -1,5 +1,6 @@
 package net.sweenus.brilliantbows.item.custom;
 
+import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -25,8 +26,12 @@ import net.minecraft.world.World;
 import net.sweenus.brilliantbows.item.custom.projectiles.SeekerArrow;
 import net.sweenus.brilliantbows.registry.SoundRegistry;
 import net.sweenus.brilliantbows.util.HelperMethods;
+import net.sweenus.brilliantbows.util.SoundHelper;
 
 public class HeavensBow extends BowItem {
+
+    PositionedSoundInstance SOUND;
+    SoundHelper cls = new SoundHelper();
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
@@ -45,8 +50,6 @@ public class HeavensBow extends BowItem {
                 }
 
                 // Custom pullspeed should match that of the PredicateProvider
-                //int i = this.getMaxUseTime(stack) - remainingUseTicks;
-                //float f = getPullProgress(i);
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
                 float f = (float)i / 80.0F;
                 f = (f * f + f * 2.0F) / 3.0F;
@@ -119,6 +122,7 @@ public class HeavensBow extends BowItem {
                             }
                         }
                         sworld.playSoundFromEntity (null, playerEntity, SoundRegistry.HOLY_SUMMON.get() , SoundCategory.PLAYERS, 0.4f, 3f);
+                        cls.stopSound();
                     }
                 }
             }
@@ -130,7 +134,13 @@ public class HeavensBow extends BowItem {
         LivingEntity target = (LivingEntity) HelperMethods.getTargetedEntity(user, 256);
         if (target != null && !target.hasStatusEffect(StatusEffects.GLOWING))
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 200, 0), user);
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundRegistry.HOLY_CHARGE.get(), SoundCategory.PLAYERS, 0.5F, 0.7F / (world.getRandom().nextFloat() * 0.4F + 1.0F) + 1 * 0.5F);
+
+        if (!world.isClient) {
+            SOUND = PositionedSoundInstance.master(SoundRegistry.HOLY_CHARGE.get(), 0.05F);
+
+            cls.SoundSet(world, SOUND);
+            cls.playSound();
+        }
 
         return super.use(world, user, hand);
     }
