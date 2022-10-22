@@ -2,7 +2,6 @@ package net.sweenus.brilliantbows.registry;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import net.minecraft.item.ArrowItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;

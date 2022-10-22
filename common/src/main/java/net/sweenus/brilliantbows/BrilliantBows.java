@@ -9,7 +9,7 @@ import net.sweenus.brilliantbows.config.BrilliantBowsConfig;
 import net.sweenus.brilliantbows.config.Config;
 import net.sweenus.brilliantbows.registry.ItemsRegistry;
 import net.sweenus.brilliantbows.registry.SoundRegistry;
-import net.sweenus.brilliantbows.util.PredicateProvider;
+import net.sweenus.brilliantbows.util.BrilliantBowsItemProperties;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,11 +40,9 @@ public class BrilliantBows {
         BrilliantBowsConfig.generateConfigs(json == null || !json.has("regen_brilliantbows_config_file") || json.get("regen_brilliantbows_config_file").getAsBoolean());
         BrilliantBowsConfig.loadConfig();
 
-
-
         ItemsRegistry.ITEM.register();
         SoundRegistry.SOUND.register();
-        PredicateProvider.registerModModels();
+        BrilliantBowsItemProperties.addBrilliantBowsItemProperties();
 
 
 
