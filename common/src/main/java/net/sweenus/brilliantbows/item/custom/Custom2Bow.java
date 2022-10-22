@@ -3,6 +3,7 @@ package net.sweenus.brilliantbows.item.custom;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -25,6 +26,11 @@ import net.sweenus.brilliantbows.util.HelperMethods;
 
 public class Custom2Bow extends BowItem {
 
+    @Override
+    public int getMaxUseTime(ItemStack stack) {
+        return 172000;
+    }
+
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
@@ -36,8 +42,16 @@ public class Custom2Bow extends BowItem {
                     itemStack = new ItemStack(Items.ARROW);
                 }
 
+                // Custom pullspeed should match that of the PredicateProvider
+                //int i = this.getMaxUseTime(stack) - remainingUseTicks;
+                //float f = getPullProgress(i);
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
-                float f = getPullProgress(i);
+                float f = (float)i / 80.0F;
+                f = (f * f + f * 2.0F) / 3.0F;
+                if (f > 1.0F) {
+                    f = 1.0F;
+                }
+
                 if (!((double) f < 0.1)) {
                     boolean bl2 = bl && itemStack.isOf(Items.ARROW);
                     if (!world.isClient) {
@@ -58,7 +72,6 @@ public class Custom2Bow extends BowItem {
 
                                         ArrowItem arrowItem = (ArrowItem) (itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
                                         PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, itemStack, playerEntity);
-                                        //persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F, 1.0F);
                                         persistentProjectileEntity.setVelocity((le.getX() - user.getX()) / 5, (((le.getY() - user.getY()) - 0.5)  / 5), (le.getZ() - user.getZ())  / 5);
                                         if (f == 1.0F) {
                                             persistentProjectileEntity.setCritical(true);
@@ -113,6 +126,26 @@ public class Custom2Bow extends BowItem {
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 100, 0), user);
 
         return super.use(world, user, hand);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (!world.isClient && (entity instanceof PlayerEntity player)) {
+
+            //Glow targets when bow is being pulled (with tiny delay)
+            if (((PlayerEntity) entity).isUsingItem()) {
+                if (player.getEquippedStack(EquipmentSlot.MAINHAND) == stack || player.getEquippedStack(EquipmentSlot.OFFHAND) == stack) {
+                    int lfrequency = (int) 2;
+                    if (player.age % lfrequency == 0) {
+                        LivingEntity target = (LivingEntity) HelperMethods.getTargetedEntity(entity, 256);
+                        if (target != null && !target.hasStatusEffect(StatusEffects.GLOWING))
+                            target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 100, 0), entity);
+
+
+                    }
+                }
+            }
+        }
     }
 
 

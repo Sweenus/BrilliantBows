@@ -15,7 +15,6 @@ public class RainArrow3 extends ArrowEntity {
     protected void onHit(LivingEntity target) {
         if (!this.world.isClient) {
             this.discard();
-            //world.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.ENTITY_ARROW_HIT, SoundCategory.PLAYERS, 1.0F, 1.0F);
         }
     }
 

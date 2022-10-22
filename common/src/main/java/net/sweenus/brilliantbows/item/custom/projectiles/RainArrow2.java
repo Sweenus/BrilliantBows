@@ -29,7 +29,6 @@ public class RainArrow2 extends ArrowEntity {
                 int randomc = (int) (Math.random() * 100);
                 PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, this.asItemStack(), (LivingEntity) this.getOwner());
                 persistentProjectileEntity.updatePosition(this.getX() - 6 + randoma, this.getY() + 20, this.getZ() - 6 + randomb);
-                //persistentProjectileEntity.setPos(this.getX() - 6 + randoma, this.getY() +20, this.getZ() - 6 + randomb);
                 persistentProjectileEntity.setVelocity(0, -3, 0);
                 persistentProjectileEntity.setCritical(true);
 
@@ -56,7 +55,6 @@ public class RainArrow2 extends ArrowEntity {
                     ArrowEntity arrowEntity = new RainArrow(world, (LivingEntity) this.getOwner());
                     PersistentProjectileEntity persistentProjectileEntity2 = arrowEntity;
                     persistentProjectileEntity2.updatePosition(this.getX() - 6 + randoma, this.getY() + 20, this.getZ() - 6 + randomb);
-                    //persistentProjectileEntity.setPos(this.getX() - 6 + randoma, this.getY() +20, this.getZ() - 6 + randomb);
                     persistentProjectileEntity2.setVelocity(0, -3, 0);
                     persistentProjectileEntity2.setCritical(true);
 
@@ -99,7 +97,6 @@ public class RainArrow2 extends ArrowEntity {
                     int randomc = (int) (Math.random() * 100);
                     PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, this.asItemStack(), (LivingEntity) this.getOwner());
                     persistentProjectileEntity.updatePosition(this.getX() - 6 + randoma, this.getY() + 20, this.getZ() - 6 + randomb);
-                    //persistentProjectileEntity.setPos(this.getX() - 6 + randoma, this.getY() +20, this.getZ() - 6 + randomb);
                     persistentProjectileEntity.setVelocity(0, -3, 0);
                     persistentProjectileEntity.setCritical(true);
 
@@ -126,7 +123,6 @@ public class RainArrow2 extends ArrowEntity {
                         ArrowEntity arrowEntity = new RainArrow(world, (LivingEntity) this.getOwner());
                         PersistentProjectileEntity persistentProjectileEntity2 = arrowEntity;
                         persistentProjectileEntity2.updatePosition(this.getX() - 6 + randoma, this.getY() + 20, this.getZ() - 6 + randomb);
-                        //persistentProjectileEntity.setPos(this.getX() - 6 + randoma, this.getY() +20, this.getZ() - 6 + randomb);
                         persistentProjectileEntity2.setVelocity(0, -3, 0);
                         persistentProjectileEntity2.setCritical(true);
 

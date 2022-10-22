@@ -9,10 +9,10 @@ import net.sweenus.brilliantbows.registry.ItemsRegistry;
 public class PredicateProvider {
 
     public static void registerModModels() {
-        registerBow(ItemsRegistry.LONGBOW.get());
-        registerBow(ItemsRegistry.TRIBOW.get());
-        registerBow(ItemsRegistry.RAINBOW.get());
-        registerBow(ItemsRegistry.CUSTOM_2_BOW.get());
+        registerBow(ItemsRegistry.LONGBOW.get(), 80f);
+        registerBow(ItemsRegistry.TRIBOW.get(), 20f);
+        registerBow(ItemsRegistry.RAINBOW.get(), 20f);
+        registerBow(ItemsRegistry.CUSTOM_2_BOW.get(), 20f);
 
     }
 
@@ -36,7 +36,7 @@ public class PredicateProvider {
 }
 
  */
-    public static void registerBow(Item bow) {
+    public static void registerBow(Item bow, Float pullspeed) {
         ItemPropertiesRegistry.register(bow, new Identifier("pull"),
                 (stack, world, entity, seed) -> {
                     if (entity == null) {
@@ -45,7 +45,7 @@ public class PredicateProvider {
                     if (entity.getActiveItem() != stack) {
                         return 0.0f;
                     }
-                    return (float)(stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0f;
+                    return (float)(stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / pullspeed; // Default pullspeed is 20.0f
                 });
 
         ItemPropertiesRegistry.register(bow, new Identifier("pulling"),
