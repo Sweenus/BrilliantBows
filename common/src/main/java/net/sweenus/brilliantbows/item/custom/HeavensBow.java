@@ -17,17 +17,16 @@ import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
-import net.sweenus.brilliantbows.item.custom.projectiles.ExplosiveArrow;
 import net.sweenus.brilliantbows.item.custom.projectiles.SeekerArrow;
+import net.sweenus.brilliantbows.registry.SoundRegistry;
 import net.sweenus.brilliantbows.util.HelperMethods;
 
-public class Custom2Bow extends BowItem {
+public class HeavensBow extends BowItem {
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
@@ -108,8 +107,6 @@ public class Custom2Bow extends BowItem {
 
                                     }
 
-                                    world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-                                    world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 0.8F, 1.3F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                                     if (!bl2 && !playerEntity.getAbilities().creativeMode) {
                                         itemStack.decrement(1);
                                         if (itemStack.isEmpty()) {
@@ -121,6 +118,7 @@ public class Custom2Bow extends BowItem {
                                 }
                             }
                         }
+                        sworld.playSoundFromEntity (null, playerEntity, SoundRegistry.HOLY_SUMMON.get() , SoundCategory.PLAYERS, 0.4f, 3f);
                     }
                 }
             }
@@ -132,6 +130,7 @@ public class Custom2Bow extends BowItem {
         LivingEntity target = (LivingEntity) HelperMethods.getTargetedEntity(user, 256);
         if (target != null && !target.hasStatusEffect(StatusEffects.GLOWING))
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 200, 0), user);
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundRegistry.HOLY_CHARGE.get(), SoundCategory.PLAYERS, 0.5F, 0.7F / (world.getRandom().nextFloat() * 0.4F + 1.0F) + 1 * 0.5F);
 
         return super.use(world, user, hand);
     }
@@ -146,8 +145,10 @@ public class Custom2Bow extends BowItem {
                     int lfrequency = (int) 2;
                     if (player.age % lfrequency == 0) {
                         LivingEntity target = (LivingEntity) HelperMethods.getTargetedEntity(entity, 256);
-                        if (target != null && !target.hasStatusEffect(StatusEffects.GLOWING))
+                        if (target != null && !target.hasStatusEffect(StatusEffects.GLOWING)) {
                             target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 200, 0), entity);
+                            world.playSoundFromEntity(null, entity, SoundRegistry.TARGET_ACQUIRED.get(), SoundCategory.PLAYERS, 0.2f, 3f);
+                        }
 
 
                     }
@@ -163,7 +164,7 @@ public class Custom2Bow extends BowItem {
 
 
 
-    public Custom2Bow(Settings settings) {
+    public HeavensBow(Settings settings) {
         super(settings);
     }
 }

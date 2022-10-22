@@ -3,14 +3,13 @@ package net.sweenus.brilliantbows.item.custom.projectiles;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
+import net.sweenus.brilliantbows.registry.ItemsRegistry;
+import net.sweenus.brilliantbows.registry.SoundRegistry;
 
 public class SeekerArrow extends ArrowEntity {
 
@@ -36,7 +35,6 @@ public class SeekerArrow extends ArrowEntity {
 
 
                 if (ourTarget != null) {
-                    ArrowItem arrowItem = (ArrowItem) Items.ARROW;
                     ArrowEntity arrowEntity = new SeekerArrow2(world, (LivingEntity) this.getOwner());
                     arrowEntity.updatePosition(ourTarget.getX(), ourTarget.getY() + 10, ourTarget.getZ());
                     arrowEntity.setVelocity(0, -3 * multiplier, 0);
@@ -63,10 +61,10 @@ public class SeekerArrow extends ArrowEntity {
                     world.spawnEntity(arrowEntity);
                     ((SeekerArrow2) arrowEntity).setTarget(ourTarget); // Sets the target for the arrow
                     ((SeekerArrow2) arrowEntity).damageMultiplier(multiplier); // Sets the target for the arrow
+                    world.playSoundFromEntity (null, ourTarget, SoundRegistry.HOLY_HIT.get() , SoundCategory.PLAYERS, 0.3f, 2.5f);
 
                 }
 
-                world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_FIREWORK_ROCKET_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F));
                 this.discard();
                 }
             }

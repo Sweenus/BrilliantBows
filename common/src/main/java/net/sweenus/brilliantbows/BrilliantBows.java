@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 import net.sweenus.brilliantbows.config.BrilliantBowsConfig;
 import net.sweenus.brilliantbows.config.Config;
 import net.sweenus.brilliantbows.registry.ItemsRegistry;
+import net.sweenus.brilliantbows.registry.SoundRegistry;
 import net.sweenus.brilliantbows.util.PredicateProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,6 +43,7 @@ public class BrilliantBows {
 
 
         ItemsRegistry.ITEM.register();
+        SoundRegistry.SOUND.register();
         PredicateProvider.registerModModels();
 
 

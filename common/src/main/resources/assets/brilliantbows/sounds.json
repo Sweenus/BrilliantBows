@@ -1,0 +1,107 @@
+{
+  "swing_normal": {
+    "sounds": [
+      "brilliantbows:swing_normal"
+    ]
+  },
+  "swing_scifi": {
+    "sounds": [
+      "brilliantbows:swing_scifi"
+    ]
+  },
+  "swing_small": {
+    "sounds": [
+      "brilliantbows:swing_small"
+    ]
+  },
+  "swing_woosh": {
+    "sounds": [
+      "brilliantbows:swing_woosh"
+    ]
+  },
+  "throw_mjolnir": {
+    "sounds": [
+      "brilliantbows:throw_mjolnir"
+    ]
+  },
+  "throw_mjolnir_short": {
+    "sounds": [
+      "brilliantbows:throw_mjolnir_short"
+    ]
+  },
+  "throw_mjolnir_long": {
+    "sounds": [
+      "brilliantbows:throw_mjolnir_long"
+    ]
+  },
+  "swing_omen_one": {
+    "sounds": [
+      "brilliantbows:swing_omen_one"
+    ]
+  },
+  "swing_omen_two": {
+    "sounds": [
+      "brilliantbows:swing_omen_two"
+    ]
+  },
+  "holy_summon": {
+    "sounds": [
+      "brilliantbows:holy_summon"
+    ]
+  },
+  "holy_hit": {
+    "sounds": [
+      "brilliantbows:holy_hit"
+    ]
+  },
+  "holy_charge": {
+    "sounds": [
+      "brilliantbows:holy_charge"
+    ]
+  },
+  "arcane_hit": {
+    "sounds": [
+      "brilliantbows:arcane_hit"
+    ]
+  },
+  "target_acquired": {
+    "sounds": [
+      "brilliantbows:target_acquired"
+    ]
+  },
+  "bow_pull_long": {
+    "sounds": [
+      "brilliantbows:bow_pull_long"
+    ]
+  },
+  "bow_pull_long_2": {
+    "sounds": [
+      "brilliantbows:bow_pull_long_2"
+    ]
+  },
+  "bow_pull_long_3": {
+    "sounds": [
+      "brilliantbows:bow_pull_long_3"
+    ]
+  },
+  "bow_shoot": {
+    "sounds": [
+      "brilliantbows:bow_shoot"
+    ]
+  },
+  "bow_shoot_2": {
+    "sounds": [
+      "brilliantbows:bow_shoot_2"
+    ]
+  },
+  "bow_shoot_3": {
+    "sounds": [
+      "brilliantbows:bow_shoot_3"
+    ]
+  },
+  "bow_shoot_4": {
+    "sounds": [
+      "brilliantbows:bow_shoot_4"
+    ]
+  }
+}

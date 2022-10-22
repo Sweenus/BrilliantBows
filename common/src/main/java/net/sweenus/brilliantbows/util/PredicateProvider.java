@@ -9,10 +9,10 @@ import net.sweenus.brilliantbows.registry.ItemsRegistry;
 public class PredicateProvider {
 
     public static void registerModModels() {
-        registerBow(ItemsRegistry.LONGBOW.get(), 80f);
+        registerBow(ItemsRegistry.LONGBOW.get(), 20f);
         registerBow(ItemsRegistry.TRIBOW.get(), 20f);
         registerBow(ItemsRegistry.RAINBOW.get(), 20f);
-        registerBow(ItemsRegistry.CUSTOM_2_BOW.get(), 20f);
+        registerBow(ItemsRegistry.HEAVENSBOW.get(), 80f);
 
     }
 
