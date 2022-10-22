@@ -12,7 +12,7 @@ public class PredicateProvider {
         registerBow(ItemsRegistry.LONGBOW.get(), 20f);
         registerBow(ItemsRegistry.TRIBOW.get(), 20f);
         registerBow(ItemsRegistry.RAINBOW.get(), 20f);
-        registerBow(ItemsRegistry.HEAVENSBOW.get(), 80f);
+        registerBow(ItemsRegistry.HEAVENSBOW.get(), 40f);
 
     }
 

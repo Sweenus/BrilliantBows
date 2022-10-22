@@ -59,6 +59,16 @@
       "brilliantbows:holy_charge"
     ]
   },
+  "holy_charge_loop": {
+    "sounds": [
+      "brilliantbows:holy_charge_loop"
+    ]
+  },
+  "holy_charge_loop_2": {
+    "sounds": [
+      "brilliantbows:holy_charge_loop_2"
+    ]
+  },
   "arcane_hit": {
     "sounds": [
       "brilliantbows:arcane_hit"

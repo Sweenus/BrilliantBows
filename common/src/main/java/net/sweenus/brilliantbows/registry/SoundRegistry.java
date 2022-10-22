@@ -35,6 +35,10 @@ public class SoundRegistry {
             new SoundEvent(new Identifier(BrilliantBows.MOD_ID, "holy_hit")));
     public static final RegistrySupplier<SoundEvent> HOLY_CHARGE = SOUND.register("holy_charge", () ->
             new SoundEvent(new Identifier(BrilliantBows.MOD_ID, "holy_charge")));
+    public static final RegistrySupplier<SoundEvent> HOLY_CHARGE_LOOP = SOUND.register("holy_charge_loop", () ->
+            new SoundEvent(new Identifier(BrilliantBows.MOD_ID, "holy_charge_loop")));
+    public static final RegistrySupplier<SoundEvent> HOLY_CHARGE_LOOP_2 = SOUND.register("holy_charge_loop_2", () ->
+            new SoundEvent(new Identifier(BrilliantBows.MOD_ID, "holy_charge_loop_2")));
     public static final RegistrySupplier<SoundEvent> ARCANE_HIT = SOUND.register("arcane_hit", () ->
             new SoundEvent(new Identifier(BrilliantBows.MOD_ID, "arcane_hit")));
     public static final RegistrySupplier<SoundEvent> TARGET_ACQUIRED = SOUND.register("target_acquired", () ->

@@ -1,5 +1,9 @@
 package net.sweenus.brilliantbows.item.custom;
 
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.sound.AbstractSoundInstance;
+import net.minecraft.client.sound.MovingMinecartSoundInstance;
+import net.minecraft.client.sound.MovingSoundInstance;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -51,7 +55,7 @@ public class HeavensBow extends BowItem {
 
                 // Custom pullspeed should match that of the PredicateProvider
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
-                float f = (float)i / 80.0F;
+                float f = (float)i / 40.0F;
                 f = (f * f + f * 2.0F) / 3.0F;
                 if (f > 1.0F) {
                     f = 1.0F;
@@ -136,10 +140,9 @@ public class HeavensBow extends BowItem {
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 200, 0), user);
 
         if (!world.isClient) {
-            SOUND = PositionedSoundInstance.master(SoundRegistry.HOLY_CHARGE.get(), 0.05F);
-
-            cls.SoundSet(world, SOUND);
-            cls.playSound();
+            SOUND = PositionedSoundInstance.master(SoundRegistry.HOLY_CHARGE.get(), 1F);
+                cls.SoundSet(world, SOUND);
+                cls.playSound();
         }
 
         return super.use(world, user, hand);
