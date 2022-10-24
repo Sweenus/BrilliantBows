@@ -1,11 +1,14 @@
 package net.sweenus.brilliantbows.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import net.sweenus.brilliantbows.registry.ItemsRegistry;
 
 public class HelperMethods {
 
@@ -24,5 +27,15 @@ public class HelperMethods {
             return hitResult.getEntity();
         }
         return null;
+    }
+
+    public static boolean hasLongbow(LivingEntity livingEntity) {
+        if (livingEntity.getActiveItem().isOf(ItemsRegistry.LONGBOW.get())) {
+            ItemStack getEquippedMainHandStack = livingEntity.getEquippedStack(EquipmentSlot.MAINHAND);
+            ItemStack getEquippedOffHandStack = livingEntity.getEquippedStack(EquipmentSlot.OFFHAND);
+            return getEquippedMainHandStack.getItem() == ItemsRegistry.LONGBOW.get().asItem()
+                    || getEquippedOffHandStack.getItem() == ItemsRegistry.LONGBOW.get().asItem();
+        }
+        return false;
     }
 }

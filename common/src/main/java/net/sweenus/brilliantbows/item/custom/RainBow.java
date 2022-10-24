@@ -99,22 +99,17 @@ public class RainBow extends BowItem {
 
                         world.spawnEntity(arrowEntity);
 
-
-                            int randoma = (int) (Math.random() * 25) +1;
-                            int randomb = (int) (Math.random() * 25) +1;
-                            int randomc = (int) (Math.random() * 25) +1;
-                            int randomd = (int) (Math.random() * 25) +1;
-                            int randome = (int) (Math.random() * 25) +1;
-                            arrowEntity2.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() + randoma, 0.0F, f * 1.2F, 5F);
-                            arrowEntity3.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() + randomb, 0.0F, f * 1.2F, 5F);
-                            arrowEntity4.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() + randomc, 0.0F, f * 1.2F, 5F);
-                            arrowEntity5.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() - randomd, 0.0F, f * 1.2F, 5F);
-                            arrowEntity6.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() - randome, 0.0F, f * 1.2F, 5F);
-                            world.spawnEntity(arrowEntity2);
-                            world.spawnEntity(arrowEntity3);
-                            world.spawnEntity(arrowEntity4);
-                            world.spawnEntity(arrowEntity5);
-                            world.spawnEntity(arrowEntity6);
+                        int randomizeYaw = (int) (Math.random() * 25) + 1;
+                        arrowEntity2.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() + randomizeYaw, 0.0F, f * 1.2F, 5F);
+                        arrowEntity3.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() + randomizeYaw, 0.0F, f * 1.2F, 5F);
+                        arrowEntity4.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() + randomizeYaw, 0.0F, f * 1.2F, 5F);
+                        arrowEntity5.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() - randomizeYaw, 0.0F, f * 1.2F, 5F);
+                        arrowEntity6.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw() - randomizeYaw, 0.0F, f * 1.2F, 5F);
+                        world.spawnEntity(arrowEntity2);
+                        world.spawnEntity(arrowEntity3);
+                        world.spawnEntity(arrowEntity4);
+                        world.spawnEntity(arrowEntity5);
+                        world.spawnEntity(arrowEntity6);
 
                     }
 

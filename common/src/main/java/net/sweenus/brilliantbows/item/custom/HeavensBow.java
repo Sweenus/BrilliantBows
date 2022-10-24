@@ -54,14 +54,14 @@ public class HeavensBow extends BowItem {
                 }
 
                 // Custom pullspeed should match that of the PredicateProvider
-                int i = this.getMaxUseTime(stack) - remainingUseTicks;
-                float f = (float)i / 40.0F;
-                f = (f * f + f * 2.0F) / 3.0F;
-                if (f > 1.0F) {
-                    f = 1.0F;
+                int chargeTime = this.getMaxUseTime(stack) - remainingUseTicks;
+                float arrowVelocity = (float)chargeTime / 40.0F;
+                arrowVelocity = (arrowVelocity * arrowVelocity + arrowVelocity * 2.0F) / 3.0F;
+                if (arrowVelocity > 1.0F) {
+                    arrowVelocity = 1.0F;
                 }
 
-                if (!((double) f < 0.1)) {
+                if (!((double) arrowVelocity < 0.1)) {
                     boolean bl2 = bl && itemStack.isOf(Items.ARROW);
                     if (!world.isClient) {
                         // If you're going to keep the radii the same in multiple bows, consider making a helper method to reduce
@@ -82,9 +82,9 @@ public class HeavensBow extends BowItem {
                                         ArrowItem arrowItem = (ArrowItem)(itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
                                         ArrowEntity arrowEntity = new SeekerArrow(world, playerEntity);
                                         arrowEntity.initFromStack(stack);
-                                        //arrowEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3F, 1.0F);
+                                        //arrowEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, arrowVelocity * 3F, 1.0F);
                                         arrowEntity.setVelocity(0, 10, 0);
-                                        if (f == 1.0F) {
+                                        if (arrowVelocity == 1.0F) {
                                             arrowEntity.setCritical(true);
                                         }
 
@@ -109,7 +109,7 @@ public class HeavensBow extends BowItem {
 
                                         world.spawnEntity(arrowEntity);
                                         ((SeekerArrow) arrowEntity).setTarget(le); // Sets the target for the arrow
-                                        ((SeekerArrow) arrowEntity).damageMultiplier(f); // Should the arrow seek its target (Seeker arrows will duplicate themselves with this property later in the sequence)
+                                        ((SeekerArrow) arrowEntity).damageMultiplier(arrowVelocity); // Should the arrow seek its target (Seeker arrows will duplicate themselves with this property later in the sequence)
                                         le.removeStatusEffect(StatusEffects.GLOWING);
 
                                     }
