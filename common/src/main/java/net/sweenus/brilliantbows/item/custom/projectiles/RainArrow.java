@@ -1,32 +1,13 @@
 package net.sweenus.brilliantbows.item.custom.projectiles;
 
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.Items;
-import net.minecraft.predicate.entity.EntityPredicate;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
-import net.sweenus.brilliantbows.item.custom.RainBow;
 
 public class RainArrow extends ArrowEntity {
     

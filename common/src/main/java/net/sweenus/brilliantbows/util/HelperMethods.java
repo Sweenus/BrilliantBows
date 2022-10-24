@@ -1,8 +1,11 @@
 package net.sweenus.brilliantbows.util;
 
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.EntityHitResult;
@@ -37,5 +40,25 @@ public class HelperMethods {
                     || getEquippedOffHandStack.getItem() == ItemsRegistry.LONGBOW.get().asItem();
         }
         return false;
+    }
+
+    public static void enchantmentHelper(ItemStack stack, PersistentProjectileEntity persistentProjectileEntity, float arrowVelocity) {
+        if (arrowVelocity == 1.0F) {
+            persistentProjectileEntity.setCritical(true);
+        }
+
+        int j = EnchantmentHelper.getLevel(Enchantments.POWER, stack);
+        if (j > 0) {
+            persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double)j * 0.5 + 0.5);
+        }
+
+        int k = EnchantmentHelper.getLevel(Enchantments.PUNCH, stack);
+        if (k > 0) {
+            persistentProjectileEntity.setPunch(k);
+        }
+
+        if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) {
+            persistentProjectileEntity.setOnFireFor(100);
+        }
     }
 }

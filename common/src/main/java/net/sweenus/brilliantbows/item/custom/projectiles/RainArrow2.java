@@ -2,18 +2,12 @@ package net.sweenus.brilliantbows.item.custom.projectiles;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.Items;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.profiling.jfr.event.ServerTickTimeEvent;
 import net.minecraft.world.World;
 
 public class RainArrow2 extends ArrowEntity {

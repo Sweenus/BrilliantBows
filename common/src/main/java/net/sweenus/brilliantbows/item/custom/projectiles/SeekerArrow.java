@@ -4,11 +4,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.ArrowItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.World;
-import net.sweenus.brilliantbows.registry.ItemsRegistry;
 import net.sweenus.brilliantbows.registry.SoundRegistry;
 
 public class SeekerArrow extends ArrowEntity {

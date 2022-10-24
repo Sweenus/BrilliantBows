@@ -5,9 +5,7 @@ import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
 
 public class RainArrow3 extends ArrowEntity {
 
