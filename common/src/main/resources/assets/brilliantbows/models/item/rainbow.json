@@ -1,6 +1,7 @@
 {
 	"credit": "Made by Sweenus using Blockbench",
 	"texture_size": [32, 32],
+	"parent": "brilliantbows:item/longbow",
 	"textures": {
 		"0": "brilliantbows:item/shield_base_woodgrain_2",
 		"3": "brilliantbows:item/cloth",

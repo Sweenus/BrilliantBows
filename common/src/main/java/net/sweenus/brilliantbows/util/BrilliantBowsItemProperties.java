@@ -28,6 +28,14 @@ public class BrilliantBowsItemProperties {
                 return livingEntity.getActiveItem() != itemStack ? 0.0F : (float) useTicks / drawSpeed;
             }
         });
+        ItemPropertiesRegistry.register(item, new Identifier("bowmagic"), (itemStack, clientWorld, livingEntity, seed) -> {
+            if (livingEntity == null) {
+                return 0.0F;
+            } else {
+                     int selection = itemStack.getOrCreateNbt().getInt("bowmagic_selection");
+                     return livingEntity.getActiveItem() != itemStack ? 0.0F : (float) selection / 10;
+            }
+        });
         ItemPropertiesRegistry.register(item, new Identifier("pulling"), (itemStack, clientWorld, livingEntity, seed) ->
                 livingEntity != null
                         && livingEntity.isUsingItem()

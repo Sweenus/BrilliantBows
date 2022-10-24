@@ -53,17 +53,11 @@ public class RainBow extends BowItem {
                     if (!world.isClient) {
                         ArrowItem arrowItem = (ArrowItem)(itemStack.getItem() instanceof ArrowItem ? itemStack.getItem() : Items.ARROW);
                         ArrowEntity arrowEntity = new RainArrow2(world, playerEntity);
-                        arrowEntity.initFromStack(stack);
                         ArrowEntity arrowEntity2 = new ArrowEntity(world, playerEntity);
-                        arrowEntity2.initFromStack(stack);
                         ArrowEntity arrowEntity3 = new ArrowEntity(world, playerEntity);
-                        arrowEntity3.initFromStack(stack);
                         ArrowEntity arrowEntity4 = new ArrowEntity(world, playerEntity);
-                        arrowEntity3.initFromStack(stack);
                         ArrowEntity arrowEntity5 = new ArrowEntity(world, playerEntity);
-                        arrowEntity3.initFromStack(stack);
                         ArrowEntity arrowEntity6 = new ArrowEntity(world, playerEntity);
-                        arrowEntity3.initFromStack(stack);
                         arrowEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 1.2F, 1.0F);
                         if (f == 1.0F) {
                             arrowEntity.setCritical(true);

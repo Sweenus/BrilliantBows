@@ -9,5 +9,14 @@
 
   "item.brilliantbows.rainbow.tooltip1": "Fires a bundle of arrows with",
   "item.brilliantbows.rainbow.tooltip2": "a chance to summon forth a rain",
-  "item.brilliantbows.rainbow.tooltip3": "of arrows, devastating all below"
+  "item.brilliantbows.rainbow.tooltip3": "of arrows, devastating all below",
+
+
+  "item.brilliantbows.bow_level": "Bow Level: %d",
+  "item.brilliantbows.bow_exp": "Bow Exp: %d%%",
+  "item.brilliantbows.bow.selection": "( %d / %d )",
+  "item.brilliantbows.bow.magic.none": "No Bow Magic ( %d / %d )",
+  "item.brilliantbows.bow.magic.trishot": "Trishot ( %d / %d )",
+  "item.brilliantbows.bow.magic.rain": "Rain ( %d / %d )",
+  "item.brilliantbows.bow.magic.ricochet": "Ricochet ( %d / %d )"
 }
