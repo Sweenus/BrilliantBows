@@ -125,7 +125,7 @@ public class BowMagicAbilities {
     public static void spawnDefaultArrow(LivingEntity owner, ItemStack bow, World world, float arrowVelocity) {
         PersistentProjectileEntity defaultArrow = new ArrowEntity(world, owner);
         HelperMethods.enchantmentHelper(bow, defaultArrow, arrowVelocity);
-        defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 1.2f, 5.0f);
+        defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 3.0f, 1.0f);
         world.spawnEntity(defaultArrow);
     }
 

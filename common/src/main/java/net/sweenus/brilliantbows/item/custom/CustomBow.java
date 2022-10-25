@@ -180,11 +180,6 @@ public class CustomBow extends BowItem {
                     (itemStack.getOrCreateNbt().getInt("bow_level"))).formatted(Formatting.RED));
         }
 
-        //tooltip.add(Text.translatable("item.brilliantbows.bow.selection",
-        //(itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
-        //(itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
-
-
         if (selection == 0)
             tooltip.add(Text.translatable("item.brilliantbows.bow.magic.none",
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
@@ -205,10 +200,6 @@ public class CustomBow extends BowItem {
             tooltip.add(Text.translatable("item.brilliantbows.bow.magic.heaven",
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
                     (itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
-
-
-
-
     }
 
     @Override
