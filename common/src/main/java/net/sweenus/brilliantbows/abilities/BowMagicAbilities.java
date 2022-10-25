@@ -99,25 +99,39 @@ public class BowMagicAbilities {
     public static void spawnRicochetArrow(LivingEntity owner, ItemStack bow, World world, float arrowVelocity) {
         RicochetArrow ricochetArrow = new RicochetArrow(world, owner);
         HelperMethods.enchantmentHelper(bow, ricochetArrow, arrowVelocity);
-        ricochetArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 1.2f, 5.0f);
+        ricochetArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 3f, 1.0f);
         world.spawnEntity(ricochetArrow);
     }
 
-    public static void spawnMultipleArrows(LivingEntity owner, ItemStack bow, World world, int numberOfArrows, float arrowVelocity, boolean arrowRain) {
+    public static void spawnMultipleArrows(LivingEntity owner, ItemStack bow, World world, int numberOfArrows, float arrowVelocity, float divergence, boolean arrowRain) {
         if (HelperMethods.hasLongbow(owner) /*&& BOW_MAGIC_ABILITY_ID_LIST.get(applyBowMagicAbility(owner)) == RAIN_ARROW*/ && arrowRain) {
             RainArrow2 rainArrow = new RainArrow2(world, owner);
             HelperMethods.enchantmentHelper(bow, rainArrow, arrowVelocity);
-            rainArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 1.2f, 5.0f);
+            rainArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 1.2f, divergence); //5
             world.spawnEntity(rainArrow);
         } else if (HelperMethods.hasLongbow(owner) /*&& BOW_MAGIC_ABILITY_ID_LIST.get(applyBowMagicAbility(owner)) == TRISHOT_ARROW*/){
             ArrowEntity defaultArrow = new ArrowEntity(world, owner);
-            defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 1.2f, 5.0f);
+            defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 1.2f, divergence); //1
             world.spawnEntity(defaultArrow);
         }
         for (int i = 1; i < Math.min(numberOfArrows, 6); i++) {
             ArrowEntity defaultArrow = new ArrowEntity(world, owner);
             int randomizeYaw = (int) (Math.random() * 50) - 25;
-            defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw() + randomizeYaw, 0.0f, arrowVelocity * 1.2f, 5.0f);
+            defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw() + randomizeYaw, 0.0f, arrowVelocity * 1.2f, divergence);
+            world.spawnEntity(defaultArrow);
+        }
+    }
+
+    public static void spawnConeArrows(LivingEntity owner, ItemStack bow, World world, int numberOfArrows, float arrowVelocity, float yawAngle) {
+        if (HelperMethods.hasLongbow(owner) /*&& BOW_MAGIC_ABILITY_ID_LIST.get(applyBowMagicAbility(owner)) == TRISHOT_ARROW*/){
+            ArrowEntity defaultArrow = new ArrowEntity(world, owner);
+            defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 3f, 1.0f); //1
+            world.spawnEntity(defaultArrow);
+        }
+        for (int i = 1; i < Math.min(numberOfArrows, 32); i++) {
+            ArrowEntity defaultArrow = new ArrowEntity(world, owner);
+            float yawSpread = (owner.getYaw() - (yawAngle /2)) + ((yawAngle / numberOfArrows) * i) ; //Evenly distributes our arrows within our chosen angle
+            defaultArrow.setVelocity(owner, owner.getPitch(), yawSpread, 0.0f, arrowVelocity * 3f, 1.0f);
             world.spawnEntity(defaultArrow);
         }
     }

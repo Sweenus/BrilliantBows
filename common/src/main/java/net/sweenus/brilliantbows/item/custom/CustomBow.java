@@ -53,8 +53,8 @@ public class CustomBow extends BowItem {
                             //noinspection RedundantSuppression
                             case 0 -> //noinspection DuplicateBranchesInSwitch
                                     BowMagicAbilities.spawnDefaultArrow(playerEntity, stack, world, arrowVelocity);
-                            case 1 -> BowMagicAbilities.spawnMultipleArrows(playerEntity, stack, world,3, arrowVelocity, false);
-                            case 2 -> BowMagicAbilities.spawnMultipleArrows(playerEntity, stack, world,5, arrowVelocity, true);
+                            case 1 -> BowMagicAbilities.spawnConeArrows(playerEntity, stack, world,3, arrowVelocity, 18);
+                            case 2 -> BowMagicAbilities.spawnMultipleArrows(playerEntity, stack, world,5, arrowVelocity, 5, true);
                             case 3 -> BowMagicAbilities.spawnRicochetArrow(playerEntity, stack, world, arrowVelocity);
                             case 4 -> BowMagicAbilities.spawnHeavensArrows(playerEntity, stack, world, arrowVelocity);
                             default -> BowMagicAbilities.spawnDefaultArrow(playerEntity, stack, world, arrowVelocity);
