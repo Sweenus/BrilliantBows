@@ -16,7 +16,7 @@ public class BrilliantBowsItemProperties {
         makeBows(ItemsRegistry.LONGBOW.get(), 20f);
         makeBows(ItemsRegistry.HEAVENSBOW.get(), 40f);
         makeBows(ItemsRegistry.RAINBOW.get(), 20f);
-        makeBows(ItemsRegistry.TRIBOW.get(), 20f);
+        makeBows(ItemsRegistry.TRIBOW.get(), 120f);
     }
 
     public static void makeBows(Item item, float drawSpeed) {

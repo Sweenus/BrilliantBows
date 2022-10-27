@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import net.sweenus.brilliantbows.item.custom.projectiles.RainArrow2;
@@ -96,6 +97,35 @@ public class BowMagicAbilities {
         }
     }
 
+    public static int shootPeriod;
+    public static int shootCount;
+    public static int shootInterval;
+
+    public static void rapidFireInventoryTickUpdate(PlayerEntity shooter, World world, ItemStack stack, int timePeriod, int fireRate) {
+        if (HelperMethods.hasLongbow(shooter) /*&& BOW_MAGIC_ABILITY_ID_LIST.get(applyBowMagicAbility(shooter)) == HEAVENS_ARROW*/) {
+            if (shooter.isUsingItem()) {
+                shootPeriod --;
+                if (shootPeriod > 0 && shootPeriod == shootInterval) {
+
+                    shootCount ++;
+                    shootInterval = timePeriod - (shootCount * fireRate);
+                    BowMagicAbilities.spawnDefaultArrow((LivingEntity) shooter, stack, world, 1.2f);
+                    world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                }
+            }
+        }
+    }
+
+    public static void refreshRapidFireCounters(LivingEntity shooter, World world, int arrowCount, int timePeriod, int fireRate) {
+        if (HelperMethods.hasLongbow(shooter) /*&& BOW_MAGIC_ABILITY_ID_LIST.get(applyBowMagicAbility(shooter)) == RAPID_FIRE*/) {
+            if (!world.isClient) {
+                shootPeriod = timePeriod;
+                shootCount = arrowCount;
+                shootInterval = timePeriod - (shootCount * fireRate);
+            }
+        }
+    }
+
     public static void spawnRicochetArrow(LivingEntity owner, ItemStack bow, World world, float arrowVelocity) {
         RicochetArrow ricochetArrow = new RicochetArrow(world, owner);
         HelperMethods.enchantmentHelper(bow, ricochetArrow, arrowVelocity);
@@ -109,10 +139,6 @@ public class BowMagicAbilities {
             HelperMethods.enchantmentHelper(bow, rainArrow, arrowVelocity);
             rainArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 1.2f, divergence); //5
             world.spawnEntity(rainArrow);
-        } else if (HelperMethods.hasLongbow(owner) /*&& BOW_MAGIC_ABILITY_ID_LIST.get(applyBowMagicAbility(owner)) == TRISHOT_ARROW*/){
-            ArrowEntity defaultArrow = new ArrowEntity(world, owner);
-            defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 1.2f, divergence); //1
-            world.spawnEntity(defaultArrow);
         }
         for (int i = 1; i < Math.min(numberOfArrows, 6); i++) {
             ArrowEntity defaultArrow = new ArrowEntity(world, owner);

@@ -96,6 +96,29 @@
 				"bowmagic": 0.3
 			},
 			"model": "brilliantbows:item/longbow_pulling_2"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"bowmagic": 0.4
+			},
+			"model": "brilliantbows:item/heavensbow_pulling_0"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 0.50,
+				"bowmagic": 0.4
+			},
+			"model": "brilliantbows:item/heavensbow_pulling_1"
+		},
+		{
+			"predicate": {
+				"pulling": 1,
+				"pull": 0.9,
+				"bowmagic": 0.4
+			},
+			"model": "brilliantbows:item/heavensbow_pulling_2"
 		}
 	],
 	"elements": [

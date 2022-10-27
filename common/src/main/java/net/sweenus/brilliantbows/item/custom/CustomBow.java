@@ -120,6 +120,9 @@ public class CustomBow extends BowItem {
             if (selection == 4) {
                 BowMagicAbilities.applyHeavensArrowEffects(user, world);
             }
+            if (selection == 5) {
+                BowMagicAbilities.refreshRapidFireCounters(user, world, 5, 120, 10);
+            }
 
             if (user.isSneaking()) {
 
@@ -131,11 +134,11 @@ public class CustomBow extends BowItem {
 
 
             //Bow leveling
-            if (itemStack.getOrCreateNbt().getInt("bow_exp") < 100 && itemStack.getOrCreateNbt().getInt("bow_level") < 5) {
+            if (itemStack.getOrCreateNbt().getInt("bow_exp") < 100 && itemStack.getOrCreateNbt().getInt("bow_level") < 100) {
                 itemStack.getOrCreateNbt().putInt("bow_exp", itemStack.getOrCreateNbt().getInt("bow_exp") + 10);
             } else if (itemStack.getOrCreateNbt().getInt("bow_exp") >= 100) {
                 itemStack.getOrCreateNbt().putInt("bow_exp", 0);
-                if (itemStack.getOrCreateNbt().getInt("bow_level") < 5) {
+                if (itemStack.getOrCreateNbt().getInt("bow_level") < 100) {
                     itemStack.getOrCreateNbt().putInt("bow_level", itemStack.getOrCreateNbt().getInt("bow_level") + 1);
                     itemStack.getOrCreateNbt().putInt("bowmagic_maxselection", maxselection + 1);
                 }
@@ -154,6 +157,11 @@ public class CustomBow extends BowItem {
                 BowMagicAbilities.heavensArrowSweepInventoryTickUpdate(player, world);
             }
         }
+        if (selection == 5) {
+            if (!world.isClient && (entity instanceof PlayerEntity player)) {
+                BowMagicAbilities.rapidFireInventoryTickUpdate(player, world, stack, 120, 10);
+            }
+        }
     }
 
     @Override
@@ -167,7 +175,7 @@ public class CustomBow extends BowItem {
         tooltip.add(Text.literal(""));
 
 
-        if(itemStack.getOrCreateNbt().getInt("bow_level") < 5) {
+        if(itemStack.getOrCreateNbt().getInt("bow_level") < 100) {
 
             tooltip.add(Text.translatable("item.brilliantbows.bow_level",
                     (itemStack.getOrCreateNbt().getInt("bow_level"))).formatted(Formatting.GOLD));
@@ -175,7 +183,7 @@ public class CustomBow extends BowItem {
             tooltip.add(Text.translatable("item.brilliantbows.bow_exp",
                     (itemStack.getOrCreateNbt().getInt("bow_exp"))).formatted(Formatting.GREEN));
 
-        } else if(itemStack.getOrCreateNbt().getInt("bow_level") == 5) {
+        } else if(itemStack.getOrCreateNbt().getInt("bow_level") == 100) {
             tooltip.add(Text.translatable("item.brilliantbows.bow_level",
                     (itemStack.getOrCreateNbt().getInt("bow_level"))).formatted(Formatting.RED));
         }
@@ -210,7 +218,7 @@ public class CustomBow extends BowItem {
         stack.getOrCreateNbt().putInt("bowmagic_selection", 1);
         stack.getOrCreateNbt().putInt("bow_level", 1);
         stack.getOrCreateNbt().putInt("bow_exp", 10);
-        stack.getOrCreateNbt().putInt("bowmagic_maxselection", 4);
+        stack.getOrCreateNbt().putInt("bowmagic_maxselection", 5);
 
         return false;
     }

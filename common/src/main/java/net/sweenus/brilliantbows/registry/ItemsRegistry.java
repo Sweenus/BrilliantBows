@@ -7,10 +7,7 @@ import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 import net.sweenus.brilliantbows.BrilliantBows;
 import net.sweenus.brilliantbows.config.BrilliantBowsConfig;
-import net.sweenus.brilliantbows.item.custom.CustomBow;
-import net.sweenus.brilliantbows.item.custom.HeavensBow;
-import net.sweenus.brilliantbows.item.custom.RainBow;
-import net.sweenus.brilliantbows.item.custom.TrishotBow;
+import net.sweenus.brilliantbows.item.custom.*;
 
 public class ItemsRegistry {
 
@@ -33,8 +30,8 @@ public class ItemsRegistry {
     public static final RegistrySupplier<CustomBow> LONGBOW = ITEM.register( "longbow", () ->
             new CustomBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.EPIC).maxDamage((int) wood_durability)));
 
-    public static final RegistrySupplier<TrishotBow> TRIBOW = ITEM.register( "tribow", () ->
-            new TrishotBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.UNCOMMON).maxDamage((int) wood_durability)));
+    public static final RegistrySupplier<RapidFireBow> TRIBOW = ITEM.register( "tribow", () ->
+            new RapidFireBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.UNCOMMON).maxDamage((int) wood_durability)));
 
     public static final RegistrySupplier<RainBow> RAINBOW = ITEM.register( "rainbow", () ->
             new RainBow(new Item.Settings().group(BrilliantBows.BRILLIANTBOWS).rarity(Rarity.EPIC).maxDamage((int) wood_durability)));
