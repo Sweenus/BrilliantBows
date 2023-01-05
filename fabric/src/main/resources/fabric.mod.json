@@ -8,7 +8,7 @@
     "Sweenus"
   ],
   "contact": {},
-  "license": "LGPL-3.0",
+  "license": "Timefall Development License",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
