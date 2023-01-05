@@ -146,6 +146,9 @@ public class BowMagicAbilities {
             defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw() + randomizeYaw, 0.0f, arrowVelocity * 1.2f, divergence);
             world.spawnEntity(defaultArrow);
         }
+        if (owner instanceof PlayerEntity playerEntity) {
+            playerEntity.getItemCooldownManager().set(bow.getItem(), 90);
+        }
     }
 
     public static void spawnConeArrows(LivingEntity owner, ItemStack bow, World world, int numberOfArrows, float arrowVelocity, float yawAngle) {
@@ -154,10 +157,11 @@ public class BowMagicAbilities {
             defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw(), 0.0f, arrowVelocity * 3f, 1.0f); //1
             world.spawnEntity(defaultArrow);
         }
-        for (int i = 1; i < Math.min(numberOfArrows, 32); i++) {
+        for (int i = 1; i < Math.min(numberOfArrows, 64); i++) {
             ArrowEntity defaultArrow = new ArrowEntity(world, owner);
             float yawSpread = (owner.getYaw() - (yawAngle /2)) + ((yawAngle / numberOfArrows) * i) ; //Evenly distributes our arrows within our chosen angle
             defaultArrow.setVelocity(owner, owner.getPitch(), yawSpread, 0.0f, arrowVelocity * 3f, 1.0f);
+            defaultArrow.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
             world.spawnEntity(defaultArrow);
         }
     }

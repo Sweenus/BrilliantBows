@@ -1,11 +1,17 @@
 {
-  "item.brilliantbows.tribow": "TriBow",
-  "item.brilliantbows.rainbow": "RainBow",
+  "item.brilliantbows.powerless": "Powerless Bow",
+  "item.brilliantbows.tribow": "Magic Bow +%d [TriBow]",
+  "item.brilliantbows.rainbow": "Magic Bow +%d [RainBow]",
+  "item.brilliantbows.ricochet": "Magic Bow +%d [Ricochet Bow]",
+  "item.brilliantbows.heaven": "Magic Bow +%d [Heavens Bow]",
+  "item.brilliantbows.wave": "Magic Bow +%d [Wave Bow]",
+  "item.brilliantbows.tsunami": "Magic Bow +%d [Tsunami Bow]",
+  "item.brilliantbows.arcannihilator": "Magic Bow +%d [Arc Annihilator Bow]",
 
 
 
-  "item.brilliantbows.tribow.tooltip2": "Magically transmutes arrows into",
-  "item.brilliantbows.tribow.tooltip3": "greater quantities when firing",
+  "item.brilliantbows.tribow.tooltip1": "Magically transmutes arrows into",
+  "item.brilliantbows.tribow.tooltip2": "greater quantities when firing",
 
   "item.brilliantbows.rainbow.tooltip1": "Fires a bundle of arrows with",
   "item.brilliantbows.rainbow.tooltip2": "a chance to summon forth a rain",
@@ -18,5 +24,9 @@
   "item.brilliantbows.bow.magic.none": "No Bow Magic ( %d / %d )",
   "item.brilliantbows.bow.magic.trishot": "Trishot ( %d / %d )",
   "item.brilliantbows.bow.magic.rain": "Rain ( %d / %d )",
-  "item.brilliantbows.bow.magic.ricochet": "Ricochet ( %d / %d )"
+  "item.brilliantbows.bow.magic.ricochet": "Ricochet ( %d / %d )",
+  "item.brilliantbows.bow.magic.heaven": "HeavensArrow ( %d / %d )",
+  "item.brilliantbows.bow.magic.wave": "Wave ( %d / %d )",
+  "item.brilliantbows.bow.magic.tsunami": "Tsunami ( %d / %d )",
+  "item.brilliantbows.bow.magic.arcannihilator": "Arc Annihilator ( %d / %d )"
 }
