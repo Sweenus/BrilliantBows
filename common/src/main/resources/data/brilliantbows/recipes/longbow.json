@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:bow"
+    },
+    "X": {
+      "item": "minecraft:white_wool"
+    },
+    "Y": {
+      "item": "minecraft:diamond"
+    },
+    "Z": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "pattern": [
+    " Y ",
+    "X#X",
+    "Z Z"
+  ],
+  "result": {
+    "item": "brilliantbows:longbow"
+  }
+}

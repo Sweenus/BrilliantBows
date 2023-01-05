@@ -32,7 +32,7 @@ public class CustomBow extends BowItem {
 
     PositionedSoundInstance SOUND;
     SoundHelper cls = new SoundHelper();
-    private static int generalTimer = 15;
+    protected static int generalTimer = 10;
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
@@ -100,6 +100,10 @@ public class CustomBow extends BowItem {
         if (!world.isClient) {
 
             int choose_sound = (int) (Math.random() * 30);
+            ItemStack itemStack = user.getEquippedStack(EquipmentSlot.MAINHAND);
+            int selection = itemStack.getOrCreateNbt().getInt("bowmagic_selection");
+            int maxselection = itemStack.getOrCreateNbt().getInt("bowmagic_maxselection");
+
 
             boolean bl = user.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, this.getDefaultStack()) > 0;
             ItemStack itemStackA = user.getArrowType(this.getDefaultStack());
@@ -113,6 +117,11 @@ public class CustomBow extends BowItem {
                     case 2 -> SoundRegistry.BOW_PULL_LONG_3.get();
                     default -> SoundRegistry.BOW_PULL_LONG.get();
                 };
+
+                if (selection == 4) {
+                    soundEvent = SoundRegistry.HOLY_CHARGE.get();
+                }
+
                 if (soundEvent != null)
                     SOUND = PositionedSoundInstance.master(soundEvent, 0.6F / (world.getRandom().nextFloat() * 0.4F + 1.0F) + 1 * 0.5F, 0.5F);
 
@@ -122,10 +131,6 @@ public class CustomBow extends BowItem {
 
                 //Bow magic cycle
 
-
-                ItemStack itemStack = user.getEquippedStack(EquipmentSlot.MAINHAND);
-                int selection = itemStack.getOrCreateNbt().getInt("bowmagic_selection");
-                int maxselection = itemStack.getOrCreateNbt().getInt("bowmagic_maxselection");
 
                 if (selection == 4) {
                     BowMagicAbilities.applyHeavensArrowEffects(user, world);
@@ -183,10 +188,11 @@ public class CustomBow extends BowItem {
 
         //Cycle bow magic
 
-        if (generalTimer > 0)
+        if (!world.isClient && (entity instanceof PlayerEntity player)) {
+
+            if (generalTimer > 0 && player.getEquippedStack(EquipmentSlot.MAINHAND) == stack)
                 generalTimer --;
 
-        if (!world.isClient && (entity instanceof PlayerEntity player)) {
             if (player.handSwinging && generalTimer < 1 && player.getEquippedStack(EquipmentSlot.MAINHAND) == stack) {
 
                 if (selection < maxselection)
@@ -194,7 +200,7 @@ public class CustomBow extends BowItem {
                 if (selection == maxselection)
                     stack.getOrCreateNbt().putInt("bowmagic_selection", 1);
 
-                generalTimer = 15;
+                generalTimer = 10;
             }
         }
 
@@ -246,38 +252,62 @@ public class CustomBow extends BowItem {
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
                     (itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
             tooltip.add(Text.literal(""));
-            tooltip.add(Text.translatable("item.brilliantbows.tribow.tooltip1"));
-            tooltip.add(Text.translatable("item.brilliantbows.tribow.tooltip2"));
+            tooltip.add(Text.translatable("item.brilliantbows.tribow.tooltip1").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.tribow.tooltip2").formatted(Formatting.GREEN));
         }
         if (selection == 2) {
             tooltip.add(Text.translatable("item.brilliantbows.bow.magic.rain",
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
                     (itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
             tooltip.add(Text.literal(""));
-            tooltip.add(Text.translatable("item.brilliantbows.rainbow.tooltip1"));
-            tooltip.add(Text.translatable("item.brilliantbows.rainbow.tooltip2"));
-            tooltip.add(Text.translatable("item.brilliantbows.rainbow.tooltip3"));
+            tooltip.add(Text.translatable("item.brilliantbows.rainbow.tooltip1").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.rainbow.tooltip2").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.rainbow.tooltip3").formatted(Formatting.GREEN));
         }
-        if (selection == 3)
+        if (selection == 3) {
             tooltip.add(Text.translatable("item.brilliantbows.bow.magic.ricochet",
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
                     (itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
-        if (selection == 4)
+            tooltip.add(Text.literal(""));
+            tooltip.add(Text.translatable("item.brilliantbows.ricochet.tooltip1").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.ricochet.tooltip2").formatted(Formatting.GREEN));
+        }
+        if (selection == 4) {
             tooltip.add(Text.translatable("item.brilliantbows.bow.magic.heaven",
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
                     (itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
-        if (selection == 5)
+            tooltip.add(Text.literal(""));
+            tooltip.add(Text.translatable("item.brilliantbows.heaven.tooltip1").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.heaven.tooltip2").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.heaven.tooltip3").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.heaven.tooltip4").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.heaven.tooltip5").formatted(Formatting.GREEN));
+        }
+        if (selection == 5) {
             tooltip.add(Text.translatable("item.brilliantbows.bow.magic.wave",
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
                     (itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
-        if (selection == 6)
+            tooltip.add(Text.literal(""));
+            tooltip.add(Text.translatable("item.brilliantbows.wave.tooltip1").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.wave.tooltip2").formatted(Formatting.GREEN));
+        }
+        if (selection == 6) {
             tooltip.add(Text.translatable("item.brilliantbows.bow.magic.tsunami",
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
                     (itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
-        if (selection == 7)
+            tooltip.add(Text.literal(""));
+            tooltip.add(Text.translatable("item.brilliantbows.tsunami.tooltip1").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.tsunami.tooltip2").formatted(Formatting.GREEN));
+        }
+        if (selection == 7) {
             tooltip.add(Text.translatable("item.brilliantbows.bow.magic.arcannihilator",
                     (itemStack.getOrCreateNbt().getInt("bowmagic_selection")),
                     (itemStack.getOrCreateNbt().getInt("bowmagic_maxselection"))).formatted(Formatting.WHITE));
+            tooltip.add(Text.literal(""));
+            tooltip.add(Text.translatable("item.brilliantbows.arcannihilator.tooltip1").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.arcannihilator.tooltip2").formatted(Formatting.GREEN));
+            tooltip.add(Text.translatable("item.brilliantbows.arcannihilator.tooltip3").formatted(Formatting.GREEN));
+        }
     }
 
     @Override
@@ -322,9 +352,11 @@ public class CustomBow extends BowItem {
         stack.getOrCreateNbt().putInt("bowmagic_maxselection", 5);
         */
 
+        /* For debug
         int choose = (int) (Math.random() * 8);
         stack.getOrCreateNbt().putInt("bowmagic_maxselection", choose);
         stack.getOrCreateNbt().putInt("bowmagic_selection", 1);
+         */
 
         return false;
     }
@@ -336,6 +368,7 @@ public class CustomBow extends BowItem {
 
         int choose = (int) (Math.random() * 8);
         stack.getOrCreateNbt().putInt("bowmagic_maxselection", choose);
+        stack.getOrCreateNbt().putInt("bowmagic_selection", 1);
     }
 
 
