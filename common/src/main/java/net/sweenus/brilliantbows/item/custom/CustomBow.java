@@ -32,11 +32,12 @@ public class CustomBow extends BowItem {
 
     PositionedSoundInstance SOUND;
     SoundHelper cls = new SoundHelper();
-    private static int generalTimer = 20;
+    private static int generalTimer = 15;
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         if (user instanceof PlayerEntity playerEntity) {
+            int selection = stack.getOrCreateNbt().getInt("bowmagic_selection");
             boolean bl = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
             ItemStack itemStack = playerEntity.getArrowType(stack);
             if (!itemStack.isEmpty() || bl) {
@@ -45,7 +46,6 @@ public class CustomBow extends BowItem {
                 }
 
                 int i = this.getMaxUseTime(stack) - remainingUseTicks;
-                int selection = stack.getOrCreateNbt().getInt("bowmagic_selection");
                 float arrowVelocity = getPullProgress(i);
                 if (!((double)arrowVelocity < 0.1)) {
                     boolean bl2 = bl && itemStack.isOf(Items.ARROW);
@@ -79,6 +79,7 @@ public class CustomBow extends BowItem {
                         world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), soundEvent, SoundCategory.PLAYERS, 0.5F, 1F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + arrowVelocity * 0.5F);
 
                     if (!bl2 && !playerEntity.getAbilities().creativeMode) {
+
                         itemStack.decrement(1);
                         if (itemStack.isEmpty()) {
                             playerEntity.getInventory().removeOne(itemStack);
@@ -99,36 +100,41 @@ public class CustomBow extends BowItem {
         if (!world.isClient) {
 
             int choose_sound = (int) (Math.random() * 30);
-            SoundEvent soundEvent = switch (choose_sound / 10) {
-                //noinspection RedundantSuppression
-                case 0 -> //noinspection DuplicateBranchesInSwitch
-                        SoundRegistry.BOW_PULL_LONG.get();
-                case 1 -> SoundRegistry.BOW_PULL_LONG_2.get();
-                case 2 -> SoundRegistry.BOW_PULL_LONG_3.get();
-                default -> SoundRegistry.BOW_PULL_LONG.get();
-            };
-            if (soundEvent != null)
-                SOUND = PositionedSoundInstance.master(soundEvent, 0.6F / (world.getRandom().nextFloat() * 0.4F + 1.0F) + 1 * 0.5F, 0.5F);
 
-            cls.SoundSet(world, SOUND);
-            cls.playSound();
+            boolean bl = user.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, this.getDefaultStack()) > 0;
+            ItemStack itemStackA = user.getArrowType(this.getDefaultStack());
+            if (!itemStackA.isEmpty() || bl) {
+
+                SoundEvent soundEvent = switch (choose_sound / 10) {
+                    //noinspection RedundantSuppression
+                    case 0 -> //noinspection DuplicateBranchesInSwitch
+                            SoundRegistry.BOW_PULL_LONG.get();
+                    case 1 -> SoundRegistry.BOW_PULL_LONG_2.get();
+                    case 2 -> SoundRegistry.BOW_PULL_LONG_3.get();
+                    default -> SoundRegistry.BOW_PULL_LONG.get();
+                };
+                if (soundEvent != null)
+                    SOUND = PositionedSoundInstance.master(soundEvent, 0.6F / (world.getRandom().nextFloat() * 0.4F + 1.0F) + 1 * 0.5F, 0.5F);
+
+                cls.SoundSet(world, SOUND);
+                cls.playSound();
 
 
-            //Bow magic cycle
+                //Bow magic cycle
 
 
-            ItemStack itemStack = user.getEquippedStack(EquipmentSlot.MAINHAND);
-            int selection = itemStack.getOrCreateNbt().getInt("bowmagic_selection");
-            int maxselection = itemStack.getOrCreateNbt().getInt("bowmagic_maxselection");
+                ItemStack itemStack = user.getEquippedStack(EquipmentSlot.MAINHAND);
+                int selection = itemStack.getOrCreateNbt().getInt("bowmagic_selection");
+                int maxselection = itemStack.getOrCreateNbt().getInt("bowmagic_maxselection");
 
-            if (selection == 4) {
-                BowMagicAbilities.applyHeavensArrowEffects(user, world);
-            }
-            if (selection == 99) {
-                BowMagicAbilities.refreshRapidFireCounters(user, world, 5, 120, 10);
-            }
+                if (selection == 4) {
+                    BowMagicAbilities.applyHeavensArrowEffects(user, world);
+                }
+                if (selection == 99) {
+                    BowMagicAbilities.refreshRapidFireCounters(user, world, 5, 120, 10);
+                }
 
-            //Replaced with swinging check
+                //Replaced with swinging check
             /*if (user.isSneaking()) {
 
                 if (selection < maxselection)
@@ -140,8 +146,8 @@ public class CustomBow extends BowItem {
              */
 
 
-            //Replaced with random maxselection onCraft - may use leveling later
-            //Bow leveling
+                //Replaced with random maxselection onCraft - may use leveling later
+                //Bow leveling
             /*
             if (itemStack.getOrCreateNbt().getInt("bow_exp") < 100 && itemStack.getOrCreateNbt().getInt("bow_level") < 100) {
                 itemStack.getOrCreateNbt().putInt("bow_exp", itemStack.getOrCreateNbt().getInt("bow_exp") + 10);
@@ -153,6 +159,7 @@ public class CustomBow extends BowItem {
                 }
             }
             */
+            }
         }
 
 
@@ -180,14 +187,14 @@ public class CustomBow extends BowItem {
                 generalTimer --;
 
         if (!world.isClient && (entity instanceof PlayerEntity player)) {
-            if (player.handSwinging && generalTimer < 1) {
+            if (player.handSwinging && generalTimer < 1 && player.getEquippedStack(EquipmentSlot.MAINHAND) == stack) {
 
                 if (selection < maxselection)
                     stack.getOrCreateNbt().putInt("bowmagic_selection", selection + 1);
                 if (selection == maxselection)
                     stack.getOrCreateNbt().putInt("bowmagic_selection", 1);
 
-                generalTimer = 30;
+                generalTimer = 15;
             }
         }
 

@@ -144,6 +144,7 @@ public class BowMagicAbilities {
             ArrowEntity defaultArrow = new ArrowEntity(world, owner);
             int randomizeYaw = (int) (Math.random() * 50) - 25;
             defaultArrow.setVelocity(owner, owner.getPitch(), owner.getYaw() + randomizeYaw, 0.0f, arrowVelocity * 1.2f, divergence);
+            defaultArrow.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
             world.spawnEntity(defaultArrow);
         }
         if (owner instanceof PlayerEntity playerEntity) {

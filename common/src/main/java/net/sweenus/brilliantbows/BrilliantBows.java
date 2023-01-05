@@ -25,8 +25,8 @@ public class BrilliantBows {
 
     public static void init() {
 
-        //CONFIG
-
+        //CONFIG [Keeping for later - not currently used]
+        /*
         BrilliantBowsConfig.init();
 
         String defaultConfig = """
@@ -39,6 +39,7 @@ public class BrilliantBows {
 
         BrilliantBowsConfig.generateConfigs(json == null || !json.has("regen_brilliantbows_config_file") || json.get("regen_brilliantbows_config_file").getAsBoolean());
         BrilliantBowsConfig.loadConfig();
+         */
 
         ItemsRegistry.ITEM.register();
         SoundRegistry.SOUND.register();

@@ -21,29 +21,31 @@ public class RainArrow extends ArrowEntity {
                 ArrowItem arrowItem = (ArrowItem) Items.ARROW;
                 int randoma = (int) (Math.random() * 12);
                 int randomb = (int) (Math.random() * 12);
-                ArrowEntity arrowEntity = new RainArrow3(world, (LivingEntity) this.getOwner());
-                PersistentProjectileEntity persistentProjectileEntity = arrowEntity;
-                persistentProjectileEntity.updatePosition(this.getX() - 6 + randoma, this.getY() + 20, this.getZ() - 6 + randomb);
-                persistentProjectileEntity.setVelocity(0, -3, 0);
-                persistentProjectileEntity.setCritical(true);
+                if (this.getOwner() != null) {
+                    ArrowEntity arrowEntity = new RainArrow3(world, (LivingEntity) this.getOwner());
+                    PersistentProjectileEntity persistentProjectileEntity = arrowEntity;
+                    persistentProjectileEntity.updatePosition(this.getX() - 6 + randoma, this.getY() + 20, this.getZ() - 6 + randomb);
+                    persistentProjectileEntity.setVelocity(0, -3, 0);
+                    persistentProjectileEntity.setCritical(true);
 
-                int j = EnchantmentHelper.getLevel(Enchantments.POWER, this.asItemStack());
-                if (j > 0) {
-                    persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
+                    int j = EnchantmentHelper.getLevel(Enchantments.POWER, this.asItemStack());
+                    if (j > 0) {
+                        persistentProjectileEntity.setDamage(persistentProjectileEntity.getDamage() + (double) j * 0.5 + 0.5);
+                    }
+
+                    int k = EnchantmentHelper.getLevel(Enchantments.PUNCH, this.asItemStack());
+                    if (k > 0) {
+                        persistentProjectileEntity.setPunch(k);
+                    }
+
+                    if (EnchantmentHelper.getLevel(Enchantments.FLAME, this.asItemStack()) > 0) {
+                        persistentProjectileEntity.setOnFireFor(100);
+                    }
+                    //No farming arrows
+                    persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+
+                    world.spawnEntity(persistentProjectileEntity);
                 }
-
-                int k = EnchantmentHelper.getLevel(Enchantments.PUNCH, this.asItemStack());
-                if (k > 0) {
-                    persistentProjectileEntity.setPunch(k);
-                }
-
-                if (EnchantmentHelper.getLevel(Enchantments.FLAME, this.asItemStack()) > 0) {
-                    persistentProjectileEntity.setOnFireFor(100);
-                }
-                //No farming arrows
-                persistentProjectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
-
-                world.spawnEntity(persistentProjectileEntity);
                 if (this.age % 200 == 0)
                     this.discard();
             }
