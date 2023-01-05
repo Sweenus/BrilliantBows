@@ -177,7 +177,9 @@ public class CustomBow extends BowItem {
         int maxselection = stack.getOrCreateNbt().getInt("bowmagic_maxselection");
         if (selection == 4) {
             if (!world.isClient && (entity instanceof PlayerEntity player)) {
-                BowMagicAbilities.heavensArrowSweepInventoryTickUpdate(player, world);
+                if (player.getEquippedStack(EquipmentSlot.MAINHAND) == stack) {
+                    BowMagicAbilities.heavensArrowSweepInventoryTickUpdate(player, world);
+                }
             }
         }
         if (selection == 99) {
